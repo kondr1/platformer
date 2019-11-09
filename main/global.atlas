@@ -1,0 +1,21 @@
+images {
+  image: "/assets/tiles/floor.png"
+}
+images {
+  image: "/assets/tiles/pipe-I.png"
+}
+images {
+  image: "/assets/tiles/pipe-L.png"
+}
+images {
+  image: "/assets/tiles/pipe-T.png"
+}
+images {
+  image: "/assets/tiles/pipe-X.png"
+}
+images {
+  image: "/assets/tiles/wall.png"
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0
