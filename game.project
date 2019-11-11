@@ -4,13 +4,17 @@ main_collection = /main/main.collectionc
 [script]
 shared_state = 1
 
-[display]
-width = 960
-height = 640
-
 [android]
 input_method = HiddenInputField
 
 [project]
 title = My Project
+dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://github.com/britzl/defold-input/archive/master.zip,https://github.com/britzl/defold-orthographic/archive/master.zip
+
+[tilemap]
+max_tile_count = 9048
+
+[input]
+gamepads = /in/gamepads/in.gamepadsc
+game_binding = /in/bindings/all.input_bindingc
 

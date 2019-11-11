@@ -1,6 +1,6 @@
 function newTimer(cb, max)
 	local min = 0
-	return function(dt) 
+	return function(dt)
 		min = min + dt
 		if min > max then
 			min = 0
@@ -10,10 +10,10 @@ function newTimer(cb, max)
 end
 
 function newRandomVector(vMin, vMax)
-	return function() 
+	return function()
 		return vmath.vector3(
-			math.random(vMin.x, vMax.x), 
-			math.random(vMin.y, vMax.y), 
+			math.random(vMin.x, vMax.x),
+			math.random(vMin.y, vMax.y),
 			math.random(vMin.z, vMax.z)
 		)
 	end
@@ -33,12 +33,57 @@ function router()
 					cb(message, sender)
 				end
 			end
+			return r
 		end
 	}
 	return r
 end
 
-function head(table) 
+function finiteStateMachine(startState)
+	local states = {}
+	local newState = startState
+	local activeState = startState
+	local changeState = function (state)
+		newState = state
+	end
+	local fsm = {}
+	fsm = {
+		changeState = changeState,
+		add = function (name, init, update, final)
+			states[name] = {
+				name = name,
+				init = init,
+				update = update,
+				final = final,
+			}
+			if activeState == name then
+				init(changeState)
+			end
+			return fsm
+		end,
+		proc = function (...)
+			print(activeState)
+			local state = states[activeState]
+			if state.update ~= nil then
+				state.update(changeState, ...)
+			end
+			if newState ~= activeState then
+				if state.final ~= nil then
+					state.final(...)
+				end
+				state = states[newState]
+				if state.init ~= nil then
+					state.init(changeState, ...)
+				end
+				activeState = newState
+			end
+			return fsm
+		end
+	}
+	return fsm
+end
+
+function head(table)
 	return table[0]
 end
 function tail(table)

@@ -1,0 +1,19 @@
+{
+    "Lua.diagnostics.globals": [
+        "update",
+        "vmath",
+        "hash",
+        "init",
+        "go",
+        "msg",
+        "final",
+        "spine",
+        "on_message",
+        "particlefx",
+        "on_input",
+        "on_reload",
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ]
+}

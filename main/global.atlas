@@ -16,6 +16,12 @@ images {
 images {
   image: "/assets/tiles/wall.png"
 }
+images {
+  image: "/assets/tiles/bg.jpg"
+}
+images {
+  image: "/assets/tiles/cat.png"
+}
 margin: 0
 extrude_borders: 2
 inner_padding: 0
