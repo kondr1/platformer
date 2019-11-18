@@ -1,0 +1,33 @@
+image: gmantaos/defold:latest
+stages:
+  - build
+
+# test:
+#   script:
+#   - npm i
+
+build-web:
+  type: deploy
+  stage: build
+  script:
+  - echo -jar bob.jar -h
+  - echo "----------------------"
+  - echo "Running bob.jar - resolving dependencies"
+  - java -jar bob.jar resolve
+  - echo "Running bob.jar - building"
+  - java -jar bob.jar build -p js-web --binary-output public -br report
+  only:
+  - dev
+  artifacts:
+    paths:
+    - report
+    - public
+
+# production:
+#   type: deploy
+#   stage: production
+#   script:
+#   - gem install dpl
+#   - dpl --provider=heroku --app=kondr1 --api-key=$HEROKU_API_KEY
+#   only:
+#   - master
