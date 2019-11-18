@@ -10,12 +10,12 @@ build-web:
   type: deploy
   stage: build
   script:
-  - echo -jar bob.jar -h
+  - bob -h
   - echo "----------------------"
   - echo "Running bob.jar - resolving dependencies"
-  - java -jar bob.jar resolve
+  - bob resolve
   - echo "Running bob.jar - building"
-  - java -jar bob.jar build -p js-web --binary-output public -br report
+  - bob build -p js-web --binary-output public -br report
 #   only:
 #   - dev
   artifacts:
