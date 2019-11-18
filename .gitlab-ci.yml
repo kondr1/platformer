@@ -16,8 +16,8 @@ build-web:
   - java -jar bob.jar resolve
   - echo "Running bob.jar - building"
   - java -jar bob.jar build -p js-web --binary-output public -br report
-  only:
-  - dev
+#   only:
+#   - dev
   artifacts:
     paths:
     - report
