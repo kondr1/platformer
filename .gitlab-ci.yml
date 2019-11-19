@@ -15,8 +15,8 @@ build-web:
   - echo "Running bob.jar - compile"
   - bob build --archive -br report.json
   - echo "Running bob.jar - build"
-  - bob bundle -p js-web -br report.json
-  - mv build public
+  - bob bundle -p js-web --bundle-output public -br report.json
+#   - mv build public
   - ls -lah
 #   only:
 #   - dev
