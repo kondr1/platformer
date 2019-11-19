@@ -13,7 +13,7 @@ build-web:
   - echo "Running bob.jar - resolving dependencies"
   - bob -auth yada --email yada@yada resolve
   - echo "Running bob.jar - compile"
-  - bob build -br report.json
+  - bob build --archive -br report.json
   - echo "Running bob.jar - build"
   - bob bundle -p js-web -br report.json
   - mv build public
