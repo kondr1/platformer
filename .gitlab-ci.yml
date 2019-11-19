@@ -1,13 +1,9 @@
-image: gmantaos/defold:latest
 stages:
   - build
   - deploy
 
-# test:
-#   script:
-#   - npm i
-
 build-web:
+  image: gmantaos/defold:latest
   stage: build
   script:
   - echo "Running bob.jar - resolving dependencies"
@@ -17,8 +13,6 @@ build-web:
   - echo "Running bob.jar - bundle"
   - bob bundle -p js-web --bundle-output bundle -br report-bundle.json
   - ls -lah
-#   only:
-#   - dev
   artifacts:
     paths:
     - report-*.json
