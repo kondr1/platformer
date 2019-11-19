@@ -8,7 +8,7 @@ shared_state = 1
 input_method = HiddenInputField
 
 [project]
-title = patform
+title = platform
 dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://github.com/britzl/defold-input/archive/master.zip,https://github.com/britzl/defold-orthographic/archive/master.zip
 
 [tilemap]
