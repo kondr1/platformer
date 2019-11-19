@@ -13,7 +13,7 @@ build-web:
   - bob -h
   - echo "----------------------"
   - echo "Running bob.jar - resolving dependencies"
-  - bob resolve
+  - bob -auth yada --email yada@yada resolve
   - echo "Running bob.jar - building"
   - bob build -p js-web --binary-output public -br report
 #   only:
