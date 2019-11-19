@@ -10,12 +10,12 @@ build-web:
   type: deploy
   stage: build
   script:
-  - bob -h
-  - echo "----------------------"
   - echo "Running bob.jar - resolving dependencies"
   - bob -auth yada --email yada@yada resolve
-  - echo "Running bob.jar - building"
-  - bob build bundle -p js-web -br report.json
+  - echo "Running bob.jar - compile"
+  - bob build -br report.json
+  - echo "Running bob.jar - build"
+  - bob bundle -p js-web -br report.json
   - mv build public
   - ls -lah
 #   only:
