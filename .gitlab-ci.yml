@@ -8,9 +8,10 @@ build-web:
   script:
   - bob --version
   - echo "Running bob and do magic"
-  - bob resolve -auth yada --email yada@yada \
-  -     build --archive -brhtml report.html \
-  -     bundle -p js-web --bundle-output bundle \
+  - >
+    bob resolve -auth yada --email yada@yada \
+       build --archive -brhtml report.html \
+       bundle -p js-web --bundle-output bundle \
   - ls -lah
   artifacts:
     paths:
