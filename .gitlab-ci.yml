@@ -11,7 +11,7 @@ build-web:
   - echo "Running bob.jar - build"
   - bob build --variant release --archive -br report-build.json
   - echo "Running bob.jar - bundle"
-  - bob bundle -p js-web --bundle-output bundle -br report-bundle.json
+  - bob bundle --variant release -p js-web --bundle-output bundle -br report-bundle.json
   - ls -lah
   artifacts:
     paths:
