@@ -9,12 +9,12 @@ build-web:
   - bob --version
   - echo "Running bob and do magic"
   - bob resolve -auth yada --email yada@yada \
-  -     build --archive -br report-build.json \
+  -     build --archive -brhtml report.html \
   -     bundle -p js-web --bundle-output bundle \
   - ls -lah
   artifacts:
     paths:
-    - report-*.json
+    - report*
     - build
     - bundle
     
