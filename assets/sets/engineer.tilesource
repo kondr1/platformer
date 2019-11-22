@@ -1,10 +1,130 @@
-image: "/assets/Industrial pack/engineer character/engineer.png"
+image: "/assets/Industrial pack/engineer.png"
 tile_width: 16
 tile_height: 28
 tile_margin: 0
 tile_spacing: 0
-collision: ""
+collision: "/assets/Industrial pack/engineer.png"
 material_tag: "tile"
+convex_hulls {
+  index: 0
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 10
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 20
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 30
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 40
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 50
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 60
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 70
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 80
+  count: 10
+  collision_group: ""
+}
+convex_hulls {
+  index: 90
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 102
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 114
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 126
+  count: 11
+  collision_group: ""
+}
+convex_hulls {
+  index: 137
+  count: 11
+  collision_group: ""
+}
+convex_hulls {
+  index: 148
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 160
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 172
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 184
+  count: 12
+  collision_group: ""
+}
+convex_hulls {
+  index: 196
+  count: 11
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 207
+  count: 0
+  collision_group: ""
+}
 collision_groups: "default"
 animations {
   id: "fall"

@@ -22,14 +22,14 @@ function init(self)
 				[hash("ground")] = platypus.DIR_ALL,
 				-- [hash("platform")] = platypus.DIR_DOWN,
 			},
-			left = 10, right = 10, top = 14, bottom = 14, offset = vmath.vector3(0, 0, 0)
+			left = 7, right = 7, top = 14, bottom = 14, offset = vmath.vector3(0, 0, 0)
 		},
 		gravity = -800,
 		max_velocity = 280,
-		allow_double_jump = false,
-		allow_wall_jump = false,
-		allow_wall_slide = true,
-		wall_slide_gravity = -50
+		--allow_double_jump = false,
+		--allow_wall_jump = false,
+		--allow_wall_slide = false,
+		--wall_slide_gravity = -50
 	})
 
 	function ground_contact()

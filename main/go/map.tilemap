@@ -1,4 +1,4 @@
-tile_set: "/assets/industrial.tilesource"
+tile_set: "/assets/sets/industrial.tilesource"
 layers {
   id: "bg"
   z: 0.0
