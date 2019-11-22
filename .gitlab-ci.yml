@@ -7,11 +7,11 @@ build-web:
   stage: build
   script:
   - echo bob --version
-  - echo "Running bob.jar - resolving dependencies"
-  - bob -auth yada --email yada@yada resolve
-  - echo "Running bob.jar - build"
+  - echo "Running bob - resolving dependencies"
+  - bob resolve -auth yada --email yada@yada
+  - echo "Running bob - build"
   - bob build --archive -br report-build.json
-  - echo "Running bob.jar - bundle"
+  - echo "Running bob - bundle"
   - bob bundle -p js-web --bundle-output bundle
   - ls -lah
   artifacts:
