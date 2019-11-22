@@ -9,7 +9,7 @@ build-web:
   - echo "Running bob.jar - resolving dependencies"
   - bob -auth yada --email yada@yada resolve
   - echo "Running bob.jar - build"
-  - bob build --archive -br report-build.json
+  - bob build --variant release --archive -br report-build.json
   - echo "Running bob.jar - bundle"
   - bob bundle -p js-web --bundle-output bundle -br report-bundle.json
   - ls -lah
