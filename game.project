@@ -1,20 +1,43 @@
 [bootstrap]
 main_collection = /main/main.collectionc
+render = /orthographic/render/orthographic.renderc
 
 [script]
 shared_state = 1
-
-[android]
-input_method = HiddenInputField
 
 [project]
 title = platform
 dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://github.com/britzl/defold-input/archive/master.zip,https://github.com/britzl/defold-orthographic/archive/master.zip
 
 [tilemap]
-max_tile_count = 9048
+max_tile_count = 18096
 
 [input]
 gamepads = /in/gamepads/in.gamepadsc
 game_binding = /in/bindings/all.input_bindingc
+
+[display]
+width = 1280
+height = 720
+
+[physics]
+gravity_y = 0.0
+scale = 0.02
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+max_debug_vertices = 50000
+
+[collection_proxy]
+max_count = 16
+
+[ios]
+bundle_identifier = com.kondr1.defold.platformer
+
+[android]
+package = com.kondr1.defold.platformer
+
+[osx]
+bundle_identifier = com.kondr1.defold.platformer
 
