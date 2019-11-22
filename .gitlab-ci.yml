@@ -17,6 +17,7 @@ build-web:
   artifacts:
     paths:
     - report-*.json
+    - build
     - bundle
     
 pages:
