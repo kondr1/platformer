@@ -6,7 +6,7 @@ build-web:
   image: gmantaos/defold:latest
   stage: build
   script:
-  - echo bob --version
+  - bob --version
   - echo "Running bob - resolving dependencies"
   - bob resolve -auth yada --email yada@yada
   - echo "Running bob - build"
