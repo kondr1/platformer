@@ -6,12 +6,13 @@ build-web:
   image: gmantaos/defold:latest
   stage: build
   script:
+  - echo bob --version
   - echo "Running bob.jar - resolving dependencies"
   - bob -auth yada --email yada@yada resolve
   - echo "Running bob.jar - build"
-  - bob build --variant release --archive -br report-build.json
+  - bob build --archive -br report-build.json
   - echo "Running bob.jar - bundle"
-  - bob bundle --variant release -p js-web --bundle-output bundle -br report-bundle.json
+  - bob bundle -p js-web --bundle-output bundle
   - ls -lah
   artifacts:
     paths:
@@ -25,12 +26,3 @@ pages:
   artifacts:
     paths:
     - public
-
-# production:
-#   type: deploy
-#   stage: production
-#   script:
-#   - gem install dpl
-#   - dpl --provider=heroku --app=kondr1 --api-key=$HEROKU_API_KEY
-#   only:
-#   - master
