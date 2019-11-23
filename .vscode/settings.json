@@ -12,6 +12,8 @@
         "particlefx",
         "on_input",
         "on_reload",
+        "pprint",
+        "sprite"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"

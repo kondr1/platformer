@@ -12,9 +12,27 @@ function init(self)
 	input_mapper.bind(triggers.KEY_LEFT, LEFT)
 	input_mapper.bind(triggers.KEY_RIGHT, RIGHT)
 	input_mapper.bind(triggers.KEY_SPACE, JUMP)
+	local presed_inputs = {}
+	local pressed = hash("pressed")
+	local released = hash("released")
 	self.msgs = router()
-	self.input = router()
-	
+	self.press = router()
+	self.release = router()
+	self.input = router(function (listeners, action_id, action)
+		if action_id == nil then return end
+		local state = pressed
+		if action.released then state = released end
+		if presed_inputs[action_id] ~= state then
+			presed_inputs[action_id] = state
+			if action.pressed then
+				self.press.proc(action_id, action)
+			elseif action.released then
+				self.release.proc(action_id, action)
+			end
+		end
+		return listeners[action_id]
+	end)
+
 	self.platypus = platypus.create({
 		collisions = {
 			separation = platypus.SEPARATION_SHAPES,
@@ -35,71 +53,65 @@ function init(self)
 	function ground_contact()
 		return self.platypus.has_ground_contact()
 	end
-	
+
 	function left()
 		self.platypus.left(ground_contact() and 120 or 100)
 	end
 	function right()
 		self.platypus.right(ground_contact() and 120 or 100)
 	end
-	self.input.on(JUMP, function (action)
-		if action.pressed then
-			self.platypus.jump(3000)
-			self.fsm.changeState("jump")
-		elseif action.released then
-			self.platypus.abort_jump()
+	function jump()
+		self.platypus.jump(ground_contact() and 280 or 100)
+	end
+	function anim(name)
+		return function ()
+			msg.post("#sprite", "play_animation", {id = hash(name)})
 		end
-		if ground_contact() then
-			self.platypus.abort_jump()
-			self.fsm.changeState("quite")
-		end
-	end)
+	end
 
+	self.input
+	.on(LEFT, left)
+	.on(RIGHT, right)
+	.on(JUMP, jump)
 
-	self.fsm = finiteStateMachine("quite")
-	.add("quite", function (changeState, dt)
-		self.input
-		.on(LEFT, function ()
-			left()
-			changeState("run")
-		end)
-		.on(RIGHT, function ()
-			right()
-			changeState("run")
-		end)
-		msg.post("#sprite", "play_animation", { id =  "idle" })
-	end)
-	.add("run", function (changeState, dt)
-		function wrap(dir)
-				return function(action)
-					if action.released then
-						changeState("quite")
-					else return dir()
-				end
-			end
-		end
-		self.input
-		.on(LEFT, wrap(left))
-		.on(RIGHT, wrap(right))
-		msg.post("#sprite", "play_animation", { id =  "run-left" })
-	end)
-	.add("jump", function (changeState, dt)
-		self.input
-		.on(LEFT, left)
-		.on(RIGHT, right)
-		msg.post("#sprite", "play_animation", { id =  "jump" })
-	end)
-end
+	self.press
+	.on(LEFT, anim("run-left"))
+	.on(RIGHT, anim("run-right"))
 
-function final(_)
+	self.release
+	.on(LEFT, anim("idle"))
+	.on(RIGHT, anim("idle"))
+
+	self.msgs
+	.on(platypus.FALLING, function ()
+		anim("fall")()
+	end)
+	.on(platypus.GROUND_CONTACT, function ()
+		anim("idle")()
+	end)
+	.on(platypus.WALL_CONTACT, function ()
+		print("Ouch!")
+	end)
+	.on(platypus.WALL_JUMP, function ()
+		print("Doing a wall jump!")
+	end)
+	.on(platypus.DOUBLE_JUMP, function ()
+		print("Doing a double jump!")
+	end)
+	.on(platypus.JUMP, function ()
+		anim("jump")()
+	end)
+	.on(platypus.WALL_SLIDE, function ()
+		print("Sliding down a wall!")
+	end)
 end
 
 function update(self, dt)
 	self.platypus.update(dt)
-	self.fsm.proc(dt)
 end
 
 function on_message(self, message_id, message, sender)
+	self.platypus.on_message(message_id, message)
 	self.msgs.proc(message_id, message, sender)
 end
 

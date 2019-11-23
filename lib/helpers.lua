@@ -19,20 +19,23 @@ function newRandomVector(vMin, vMax)
 	end
 end
 
-function router()
-	local handlers = {}
+function router(matcher)
+	local listeners = {}
 	local r = {}
-	r =  {
+	if matcher == nil then 
+		matcher = function (h, id)
+			if id == nil then return nil end
+			return h[id]
+		end
+	end
+	r = {
 		on = function(msg_id, cb)
-			handlers[msg_id] = cb
+			listeners[msg_id] = cb
 			return r
 		end,
 		proc = function(message_id, message, sender)
-			for msg_id, cb in pairs(handlers) do
-				if hash(msg_id) == message_id then
-					cb(message, sender)
-				end
-			end
+			local cb = matcher(listeners, message_id, message, sender)
+			if cb ~= nil then cb(message, sender) end
 			return r
 		end
 	}
@@ -89,7 +92,9 @@ end
 function tail(table)
 	return table[#table]
 end
-
+function quaterion_to_radians(quat)
+	return 2 * math.acos(quat.w)
+end
 -- находится ли точка x y над объектом по селектору.
 -- Если у объекта какое-то кастомное имя спрайта
 -- нужно указать селектор спрайта этого объекта
