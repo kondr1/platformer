@@ -95,6 +95,17 @@ end
 function quaterion_to_radians(quat)
 	return 2 * math.acos(quat.w)
 end
+function kek(x, a, b, c, d, e)
+	return function ()
+		return x(a, b, c, d, e)
+	end
+end
+function circular_shift_char(char, n)
+	n = n % 4
+	local c = bit.lshift(char, n)
+	local d = bit.rshift(char, (4 - n))
+	return bit.band(bit.bor(c, d), 0xF)
+end
 -- находится ли точка x y над объектом по селектору.
 -- Если у объекта какое-то кастомное имя спрайта
 -- нужно указать селектор спрайта этого объекта

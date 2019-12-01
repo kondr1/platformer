@@ -1,0 +1,96 @@
+require("libs.helpers")
+require("libs.common")
+
+go.property("type", hash("X"))
+local RIGHT_ANGLE = 1.5708
+
+local DIR = {
+	TOP = 0x01,
+	RIGHT = 0x02,
+	DOWN = 0x04,
+	LEFT = 0x08
+}
+
+local p = {
+	L = DIR.LEFT | DIR.DOWN,
+	I = DIR.TOP | DIR.DOWN,
+	T = DIR.LEFT | DIR.DOWN | DIR.RIGHT,
+	X = DIR.TOP | DIR.RIGHT | DIR.DOWN | DIR.LEFT
+}
+p[hash("L")] = "L"
+p[hash("I")] = "I"
+p[hash("T")] = "T"
+p[hash("X")] = "X"
+p.byHash = function (h) return p[p[h]] end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.dir = ring("top", "left", "down", "right")
+	self.dir.next()
+	local d = self.dir
+	self.angle = get_pipe_direction(self.dir.hash())
+
+	local scale = go.get(".", "scale")
+	go.set(".", "scale", scale * 0.5)
+	sprite.play_flipbook("#sprite", hash("pipe-"..p.byHash(self.type)))
+	rotate(self.angle, true)
+
+	self.msgs = router().on("rotate_left", function()
+		pprint(self.dir.next())
+		self.angle = self.angle + 1.5708
+		rotate(self.angle)
+		getDirection()
+	end)
+	.on("rotate_right", function()
+		pprint(self.dir.prev())
+		self.angle = self.angle - 1.5708
+		rotate(self.angle)
+		getDirection()
+	end)
+
+	self.input = router().on("left", function(action)
+		if action.pressed and pick_node(action.x, action.y) then
+			msg.post(".", "rotate_left")
+		end
+	end)
+	.on("right", function(action)
+		if action.pressed and pick_node(action.x, action.y) then
+			msg.post(".", "rotate_right")
+		end
+	end)
+end
+
+function on_message(self, message_id, message, sender)
+	self.msgs.proc(message_id, message, sender)
+end
+
+function on_input(self, action_id, action)
+	self.input.proc(action_id, action)
+end
+
+function get_pipe_direction(type, id)
+	local d = getDirection(id)
+	return circular_shift_char(p[type], d)
+end
+
+-- по радианам можно получить куда повернут объект
+function getDirection(id)
+	local r = get_rotation(id)
+	return math.abs(r / RIGHT_ANGLE) % 4
+end
+
+function get_rotation(id)
+	if id == nil then id = "." end
+	local quat = go.get_rotation(id)
+	return quaterion_to_radians(quat)
+end
+
+function rotate_left(id)
+	local r = get_rotation(id)
+	rotate(r - RIGHT_ANGLE)
+end
+
+function rotate_right(id)
+	local r = get_rotation(id)
+	rotate(r + RIGHT_ANGLE)
+end
