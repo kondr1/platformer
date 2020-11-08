@@ -1,5 +1,5 @@
-require("libs.helpers")
-require("libs.common")
+require("lib.helpers")
+require("lib.common")
 
 go.property("type", hash("X"))
 local RIGHT_ANGLE = 1.5708
