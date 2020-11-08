@@ -9,6 +9,15 @@ local RIGHT = hash("right")
 local JUMP = hash("jump")
 
 function init(self)
+
+	msg.post("/defluid", "activate")	-- activate creation of metaballs (fluid)
+	msg.post("/defluid", "change", { dry_each_after = 1 })	-- change param of defluid
+	timer.delay(6, false, function() 	-- after 6 s push up all metaballs
+		msg.post("/defluid", "force", { force = vmath.vector3(0,10000000,0) })
+	end)
+	msg.post("/defluid", "dry")			-- activate drying (dry a metaball every second)
+
+	
 	input.acquire()
 	input_mapper.bind(triggers.KEY_LEFT, LEFT)
 	input_mapper.bind(triggers.KEY_RIGHT, RIGHT)

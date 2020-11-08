@@ -1,13 +1,13 @@
 [bootstrap]
 main_collection = /main/main.collectionc
-render = /orthographic/render/orthographic.renderc
+render = /camera/render/orthographic.renderc
 
 [script]
 shared_state = 1
 
 [project]
 title = platform
-dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://github.com/britzl/defold-input/archive/master.zip,https://github.com/britzl/defold-orthographic/archive/master.zip
+dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://github.com/britzl/defold-input/archive/master.zip
 
 [tilemap]
 max_tile_count = 18096
@@ -21,12 +21,11 @@ width = 1280
 height = 720
 
 [physics]
-gravity_y = 0.0
-scale = 0.02
+gravity_y = -1000.0
+max_collisions = 4096
+max_contacts = 4096
 
 [graphics]
-default_texture_min_filter = nearest
-default_texture_mag_filter = nearest
 max_debug_vertices = 50000
 
 [collection_proxy]
@@ -40,4 +39,7 @@ package = com.kondr1.defold.platformer
 
 [osx]
 bundle_identifier = com.kondr1.defold.platformer
+
+[sprite]
+max_count = 1024
 

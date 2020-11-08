@@ -1,0 +1,134 @@
+local render_helper = require "camera.render.helper"
+local camera = require "camera.camera"
+
+camera.ORTHOGRAPHIC_RENDER_SCRIPT_USED = true
+
+local CLEAR_COLOR = hash("clear_color")
+local IDENTITY_MATRIX = vmath.matrix4()
+
+
+local function create_render_targets(self)
+local color_params = {
+	format = render.FORMAT_RGBA,
+	width = render.get_window_width(),
+	height = render.get_window_height(),
+	min_filter = render.FILTER_LINEAR,
+	mag_filter = render.FILTER_LINEAR,
+	u_wrap = render.WRAP_CLAMP_TO_EDGE,
+	v_wrap = render.WRAP_CLAMP_TO_EDGE
+}
+local depth_params = {
+	format = render.FORMAT_DEPTH,
+	width = render.get_window_width(),
+	height = render.get_window_height(),
+	u_wrap = render.WRAP_CLAMP_TO_EDGE,
+	v_wrap = render.WRAP_CLAMP_TO_EDGE
+}
+-- 
+	self.base_target = render.render_target("base_target", {[render.BUFFER_COLOR_BIT] = color_params, [render.BUFFER_DEPTH_BIT] = depth_params })
+	self.metaball_target = render.render_target("metaball_target", {[render.BUFFER_COLOR_BIT] = color_params, [render.BUFFER_DEPTH_BIT] = depth_params })
+end
+
+function init(self)
+	self.tile_pred = render.predicate({"tile"})
+	self.tile_foreground = render.predicate({"tile_foreground"})
+	self.gui_pred = render.predicate({"gui"})
+	self.text_pred = render.predicate({"text"})
+	self.model_pred = render.predicate({"model"})
+	self.particle_pred = render.predicate({"particle"})
+	self.particle_behind_pred= render.predicate({"particle_behind"})
+	self.metaball_pred = render.predicate({"metaball"})
+	self.render_target_pred = render.predicate({"render target"})
+
+	self.clear_color = vmath.vector4(0, 0, 0, 0)
+	self.clear_color.x = sys.get_config("render.clear_color_red", 0)
+	self.clear_color.y = sys.get_config("render.clear_color_green", 0)
+	self.clear_color.z = sys.get_config("render.clear_color_blue", 0)
+	self.clear_color.w = sys.get_config("render.clear_color_alpha", 0)
+
+	--camera.update_window_size()
+	create_render_targets(self)
+	render_helper.init()
+end
+
+function update(self)
+	-- clear color
+	render.set_depth_mask(true)
+	render.clear({[render.BUFFER_COLOR_BIT] = self.clear_color, [render.BUFFER_DEPTH_BIT] = 1, [render.BUFFER_STENCIL_BIT] = 0})
+
+
+	-- setup the viewport
+	render.set_viewport(0, 0, render.get_window_width(), render.get_window_height())
+
+
+	-- draw world space using projection received from the camera in on_message
+	render_helper.set_world_view_projection(self)
+
+	render.set_depth_mask(false)
+	render.disable_state(render.STATE_DEPTH_TEST)
+	render.disable_state(render.STATE_STENCIL_TEST)
+	render.enable_state(render.STATE_BLEND)
+	render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+	render.disable_state(render.STATE_CULL_FACE)
+
+	-- BASE RENDER
+	--		Draw all normal stuff to base render target
+	render.enable_render_target(self.base_target)
+	--render.set_render_target(render.RENDER_TARGET_DEFAULT)
+	render.clear({[render.BUFFER_COLOR_BIT] = self.clear_color, [render.BUFFER_DEPTH_BIT] = 1, [render.BUFFER_STENCIL_BIT] = 0})
+
+	render.draw(self.tile_pred)
+	render.draw(self.particle_behind_pred)
+	render.draw(self.tile_foreground)
+	render.draw(self.particle_pred)
+
+	-- Debug rendering - physics debug, draw_line
+	render.disable_state(render.STATE_DEPTH_TEST)
+	render.disable_state(render.STATE_CULL_FACE)
+	render.draw_debug3d()
+
+	render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+	render.disable_render_target(self.base_target)
+
+	-- METABALL RENDER
+	--    Draw metaballs
+	render.enable_render_target(self.metaball_target)
+	render.clear({[render.BUFFER_COLOR_BIT] = self.clear_color, [render.BUFFER_DEPTH_BIT] = 1, [render.BUFFER_STENCIL_BIT] = 0})
+	render.draw(self.metaball_pred)
+	render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+	render.disable_render_target(self.metaball_target)
+
+	-- RENDER TARGET RENDERING
+	--    Draw everything combined on the target quad
+	render.set_view(IDENTITY_MATRIX) -- set view and projection so quad fills the viewport
+	render.set_projection(IDENTITY_MATRIX)
+	render.enable_texture(0, self.metaball_target, render.BUFFER_COLOR_BIT)
+	render.enable_texture(1, self.base_target, render.BUFFER_COLOR_BIT)
+	render.draw(self.render_target_pred)
+	render.disable_texture(0, self.metaball_target)
+	render.disable_texture(1, self.base_target)
+
+
+	-- draw gui in screen space using an orthographic projection
+	render_helper.set_screen_view_projection(self)
+	render.set_viewport(0, 0, rendercam.window.x, rendercam.window.y)
+	render.set_view(IDENTITY_MATRIX)
+	-- already reset view to an identity matrix
+	render.set_projection(self.gui_proj) -- gui_proj only calculated on update_window
+
+	render.disable_state(render.STATE_CULL_FACE)
+	render.disable_state(render.STATE_DEPTH_TEST)
+	render.enable_state(render.STATE_STENCIL_TEST)
+	render.draw(self.gui_pred)
+	render.draw(self.text_pred)
+	render.disable_state(render.STATE_STENCIL_TEST)
+
+	render.set_depth_mask(false)
+end
+
+function on_message(self, message_id, message)
+	render_helper.on_message(nil, message_id, message)
+	if message_id == CLEAR_COLOR then
+		self.clear_color = message.color
+	end
+end
