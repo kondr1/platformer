@@ -3,8 +3,8 @@ instances {
   id: "player"
   prototype: "/main/go/player.go"
   position {
-    x: 39.0
-    y: 91.0
+    x: 216.0
+    y: 110.0
     z: 0.0
   }
   rotation {
@@ -96,8 +96,8 @@ instances {
   id: "defluid"
   prototype: "/assets/defluid/defluid.go"
   position {
-    x: 422.0
-    y: 173.0
+    x: 446.0
+    y: 222.0
     z: 0.0
   }
   rotation {
@@ -110,13 +110,18 @@ instances {
     id: "defluid"
     properties {
       id: "num_of_metaballs"
-      value: "100.0"
+      value: "1000.0"
       type: PROPERTY_TYPE_NUMBER
     }
     properties {
-      id: "create_at_init"
-      value: "false"
-      type: PROPERTY_TYPE_BOOLEAN
+      id: "scale_of_metaball"
+      value: "0.7"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "dry_each_after"
+      value: "10.0"
+      type: PROPERTY_TYPE_NUMBER
     }
   }
   scale3 {
