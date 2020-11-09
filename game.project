@@ -11,6 +11,7 @@ dependencies = https://github.com/britzl/Platypus/archive/master.zip,https://git
 
 [tilemap]
 max_tile_count = 18096
+max_count = 64
 
 [input]
 gamepads = /in/gamepads/in.gamepadsc
@@ -41,5 +42,5 @@ package = com.kondr1.defold.platformer
 bundle_identifier = com.kondr1.defold.platformer
 
 [sprite]
-max_count = 1024
+max_count = 5128
 

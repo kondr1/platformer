@@ -27,63 +27,63 @@ convex_hulls {
 }
 convex_hulls {
   index: 16
-  count: 0
-  collision_group: ""
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 20
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 24
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 28
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 32
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 36
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 40
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 44
+  count: 4
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 48
+  count: 5
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 53
+  count: 5
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 58
+  count: 5
+  collision_group: "pipe"
 }
 convex_hulls {
-  index: 16
-  count: 0
-  collision_group: ""
+  index: 63
+  count: 5
+  collision_group: "pipe"
 }
 collision_groups: "pipe"
 animations {

@@ -111,10 +111,10 @@ function update(self)
 
 	-- draw gui in screen space using an orthographic projection
 	render_helper.set_screen_view_projection(self)
-	render.set_viewport(0, 0, rendercam.window.x, rendercam.window.y)
+--	render.set_viewport(0, 0, rendercam.window.x, rendercam.window.y)
 	render.set_view(IDENTITY_MATRIX)
 	-- already reset view to an identity matrix
-	render.set_projection(self.gui_proj) -- gui_proj only calculated on update_window
+--	render.set_projection(self.gui_proj) -- gui_proj only calculated on update_window
 
 	render.disable_state(render.STATE_CULL_FACE)
 	render.disable_state(render.STATE_DEPTH_TEST)
