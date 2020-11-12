@@ -1,3 +1,4 @@
+--- From https://github.com/britzl/defold-orthographic
 local camera = require "camera.camera"
 
 if sys.get_config("script.shared_state") ~= "1" then

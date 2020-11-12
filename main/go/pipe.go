@@ -1,6 +1,6 @@
 components {
   id: "pipe"
-  component: "/assets/sets/pipe.tilemap"
+  component: "/main/maps/pipe.tilemap"
   position {
     x: 0.0
     y: 0.0
@@ -16,7 +16,7 @@ components {
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
-  data: "collision_shape: \"/assets/sets/pipe.tilemap\"\n"
+  data: "collision_shape: \"/main/maps/pipe.tilemap\"\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\n"
   "mass: 0.0\n"
   "friction: 0.1\n"

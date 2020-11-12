@@ -1,3 +1,4 @@
+--- From https://github.com/britzl/defold-orthographic
 --- Camera module to use in combination with the camera.go or camera.script
 
 local M = {}

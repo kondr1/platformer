@@ -110,7 +110,7 @@ instances {
     id: "defluid"
     properties {
       id: "num_of_metaballs"
-      value: "500.0"
+      value: "1.0"
       type: PROPERTY_TYPE_NUMBER
     }
     properties {
@@ -285,7 +285,7 @@ embedded_instances {
   id: "level"
   data: "components {\n"
   "  id: \"map\"\n"
-  "  component: \"/main/go/map.tilemap\"\n"
+  "  component: \"/main/maps/map.tilemap\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"
@@ -301,7 +301,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"collisionobject\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/main/go/map.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/main/maps/map.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\\n"
   "mass: 0.0\\n"
   "friction: 0.1\\n"
