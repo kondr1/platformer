@@ -47,7 +47,7 @@ function init(self)
 
 	self.platypus = platypus.create({
 		collisions = {
-			separation = platypus.SEPARATION_SHAPES,
+			separation = platypus.SEPARATION_RAYS,
 			groups = {
 				[hash("ground")] = platypus.DIR_ALL,
 				-- [hash("platform")] = platypus.DIR_DOWN,

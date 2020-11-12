@@ -283,17 +283,17 @@ convex_hulls {
 convex_hulls {
   index: 234
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 238
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 242
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 246
@@ -308,52 +308,52 @@ convex_hulls {
 convex_hulls {
   index: 246
   count: 5
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 251
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 255
   count: 5
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 260
   count: 5
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 265
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 269
   count: 5
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 274
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 278
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 282
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 286
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 290
@@ -368,37 +368,37 @@ convex_hulls {
 convex_hulls {
   index: 290
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 294
   count: 4
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 298
   count: 16
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 314
   count: 16
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 330
   count: 16
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 346
   count: 16
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 362
   count: 16
-  collision_group: "bg"
+  collision_group: ""
 }
 convex_hulls {
   index: 378
@@ -965,7 +965,6 @@ convex_hulls {
   count: 0
   collision_group: ""
 }
-collision_groups: "bg"
 collision_groups: "ground"
 animations {
   id: "L-tube"
@@ -996,3 +995,4 @@ animations {
 }
 extrude_borders: 2
 inner_padding: 0
+sprite_trim_mode: SPRITE_TRIM_MODE_OFF
